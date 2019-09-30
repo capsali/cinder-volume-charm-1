@@ -52,13 +52,13 @@ function Get-CharmServices {
     $pythonExe = Join-Path $pythonDir "python.exe"
     $cinderScript = Join-Path $pythonDir "Scripts\cinder-volume-script.py"
     $serviceWrapperCinderSMB = Get-ServiceWrapper -Service "CinderSMB" -InstallDir $CINDER_INSTALL_DIR
-    $cinderSMBConfig = Join-Path $CINDER_INSTALL_DIR "etc\cinder\cinder-smb.conf"
+    $cinderSMBConfig = Join-Path $CINDER_INSTALL_DIR "etc\cinder-smb.conf"
     try {
         $serviceWrapperCinderISCSI = Get-ServiceWrapper -Service "CinderISCSI" -InstallDir $CINDER_INSTALL_DIR
     } catch {
         $serviceWrapperCinderISCSI = Get-ServiceWrapper -Service "CinderSMB" -InstallDir $CINDER_INSTALL_DIR
     }
-    $cinderISCSIConfig = Join-Path $CINDER_INSTALL_DIR "etc\cinder\cinder-iscsi.conf"
+    $cinderISCSIConfig = Join-Path $CINDER_INSTALL_DIR "etc\cinder-iscsi.conf"
     $jujuCharmServices = @{
         'cinder-smb' = @{
             "template" = "$openstackVersion\cinder-smb.conf"
@@ -171,7 +171,7 @@ function Get-SMBShareContext {
     if(!$ctxt.Count) {
         return @{}
     }
-    $sharesConfigFile = Join-Path $CINDER_INSTALL_DIR "etc\cinder\smbfs_shares_list"
+    $sharesConfigFile = Join-Path $CINDER_INSTALL_DIR "etc\smbfs_shares_list"
     $shares = [string[]]$ctxt['share']
     [System.IO.File]::WriteAllLines($sharesConfigFile, $shares)
     return @{
