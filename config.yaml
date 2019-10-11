@@ -38,6 +38,10 @@ options:
       Whether or not to allow cinder to use the default AZ if there is no AZ specified.
       You will want this set to False when there are more than one AZ and cinder volume
       services.
+  storage-availability-zone:
+    type: string
+    description: |
+      The AZ that all the units of this charm belong to. If not set, it will default to nova AZ.
   ad-computer-group:
     type: string
     default: "cinder-group"
