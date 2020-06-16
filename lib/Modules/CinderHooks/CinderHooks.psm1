@@ -155,7 +155,7 @@ function Get-CharmServices {
             )
         }
     }
-    if($openstackVersion -in @('ocata', 'pike')) {
+    if($openstackVersion -in @('ocata', 'pike', 'queens', 'rocky', 'stein')) {
         $jujuCharmServices['cinder-smb']['context_generators'] += @(
             @{
                 "generator" = (Get-Item "function:Get-CloudComputeContext").ScriptBlock
